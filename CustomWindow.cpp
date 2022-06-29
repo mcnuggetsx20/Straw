@@ -113,10 +113,10 @@ void CustomWindow::keyPressEvent(QKeyEvent *event){
 
     if(row[column]%6 ==0 or row[column]%6==5){
         if(column==1){
-            refresh("wifi_list", this, column);
+            refresh(wifi_list, this, column);
         }
         else if(column==2){
-            refresh("eth_list", this, column);
+            refresh(eth_list, this, column);
         }
     }
 

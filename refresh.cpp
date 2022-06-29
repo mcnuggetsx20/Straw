@@ -4,6 +4,7 @@
 #include <iostream>
 #include "tools.cpp"
 
+
 std::vector<std::string> read(const std::string &file){
     std::string element;
     std::vector <std::string> elements;
@@ -45,8 +46,6 @@ void refresh(const std::string &file, CustomWindow* win, int &column){
             win -> grid[column][i%6] -> label -> setStyleSheet("background: rgba(0, 0, 0, 0); color: #7A05BE");
         }
     }
-
-    std::cout << column << ' ' << column << '\n';
 
     win -> grid[win->column][win -> row[win -> column]] -> label -> setStyleSheet("background: rgba(169, 220, 118, 255); color: #000000");
     

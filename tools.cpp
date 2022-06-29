@@ -93,7 +93,6 @@ void eth_switch(){
 void wifi_switch(){
     std::string status = getOutput("nmcli radio wifi");
     if(status=="enabled\n"){
-        std::cout << 1;
         system("nmcli radio wifi off &");
         return;
     }

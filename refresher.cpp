@@ -17,14 +17,18 @@ void REFRESHER::read(){
     win -> currentWifi = getOutput("nmcli --get-values=NAME,TYPE con show --active | grep wireless | awk -F ':' '{print $1}'");
     win -> getEth();
 
-    refresh("wifi_list",  win, c1);
-    refresh("eth_list",  win, c2);
+    refresh(win -> wifi_list,  win, c1);
+    refresh(win -> eth_list,  win, c2);
 
-    system("(nmcli --get-values=SSID,SIGNAL,BSSID --escape=no device wifi list | grep -v BC:1A:E4:84:52:B2 | awk -F ':' '{print $1}' > /mnt/hdd/coding/projects/Straw/wifi_list) &");
+    std::string command = "(nmcli --get-values=SSID,SIGNAL,BSSID --escape=no device wifi list | grep -v BC:1A:E4:84:52:B2 | awk -F ':' '{print $1}' > " + win -> wifi_list + ") &";
+    const char * pCommand = command.c_str();
+    system(pCommand);
 
-    system("(nmcli --get-values=NAME,TYPE connection show | grep ethernet | awk -F ':' '{print $1}' > /mnt/hdd/coding/projects/Straw/eth_list) &");
+    command = "(nmcli --get-values=NAME,TYPE connection show | grep ethernet | awk -F ':' '{print $1}' > " + win -> eth_list + ") &";
+    pCommand = command.c_str();
+    system(pCommand);
 
-    system("(nmcli --get-values=NAME connection show --active > /mnt/hdd/coding/projects/Straw/active_networks) &");
+    //system("(nmcli --get-values=NAME connection show --active > /mnt/hdd/coding/projects/Straw/active_networks) &");
     //REFRESHER::refresh(active_networks);
 }
 
