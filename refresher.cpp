@@ -2,6 +2,7 @@
 #include <QTimer>
 #include <fstream>
 #include <vector>
+#include <stdlib.h>
 
 REFRESHER::REFRESHER(CustomWindow* _win){
     win = _win;
@@ -11,37 +12,19 @@ REFRESHER::REFRESHER(CustomWindow* _win){
 }
 
 void REFRESHER::read(){
-    std::ifstream eth_list, wifi_list, active_networks;
+    int c1 = 1, c2= 2;
 
-    eth_list.open("eth_list", std::ios::in);
-    wifi_list.open("wifi_list", std::ios::in);
-    //active_networks.open("active_networks", std::ios::in);
+    win -> currentWifi = getOutput("nmcli --get-values=NAME,TYPE con show --active | grep wireless | awk -F ':' '{print $1}'");
+    win -> getEth();
 
-    for(int i =0 ; i < 6; ++i){
-        win -> grid[1][i] -> label -> setText("");
-        win -> grid[2][i] -> label -> setText("");
-    }
+    refresh("wifi_list",  win, c1);
+    refresh("eth_list",  win, c2);
 
-    REFRESHER::refresh(eth_list, 2);
-    REFRESHER::refresh(wifi_list, 1);
+    system("(nmcli --get-values=SSID,SIGNAL,BSSID --escape=no device wifi list | grep -v BC:1A:E4:84:52:B2 | awk -F ':' '{print $1}' > /mnt/hdd/coding/projects/Straw/wifi_list) &");
+
+    system("(nmcli --get-values=NAME,TYPE connection show | grep ethernet | awk -F ':' '{print $1}' > /mnt/hdd/coding/projects/Straw/eth_list) &");
+
+    system("(nmcli --get-values=NAME connection show --active > /mnt/hdd/coding/projects/Straw/active_networks) &");
     //REFRESHER::refresh(active_networks);
-}
-
-
-void REFRESHER::refresh(std::ifstream &file, const int &ind){
-    std::string element;
-    std::vector <std::string> elements;
-    while(file){
-        getline(file, element);
-        elements.push_back(element);
-    }
-
-    win -> maxRows[ind] = std::max( (int)elements.size() - 2, 0 );
-
-    for(int i =0 ; i < std::min((int)elements.size(), 6); ++i){
-        win -> grid[ind][i] -> label -> setText( QString::fromStdString(elements[i]) );
-        win -> grid[ind][i] -> label -> adjustSize();
-    }
-    
 }
 

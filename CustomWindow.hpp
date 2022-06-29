@@ -8,18 +8,34 @@
 
 #include "TEXT.cpp"
 
+typedef void(*functionPointer)();
+
 class CustomWindow : public QMainWindow {
     public:
+        TEXT* passwordInd;
+        TEXT* passwordField;
+        std::string conToPass = "";
+        std::string currentWifi = "";
+        std::vector<std::string> currentEth;
+        std::string coded = "";
+        std::string password = "";
+        int row[3] = {0,0,0};
         int column = 0;
-        int row = 0;
         int maxRows[3] = {1, 6, 6};
+        int pages = 0;
+        bool bEnterPassword = false;
+        bool Return = false;
+        bool cond;
+        //functionPointer fptrs[3] = {nullptr, &wifi_switch, &eth_switch};
         std::vector<TEXT*> grid[3] = { std::vector<TEXT*>(2), std::vector<TEXT*>(6), std::vector<TEXT*>(6) };
 
         CustomWindow();
         void paintEvent(QPaintEvent *event);
         void animation(QRect &start, QRect &stop);
         void select();
+        void enterPassword(QString &key);
         void keyPressEvent(QKeyEvent *event);
         void initGrid();
+        void getEth();
 };
         

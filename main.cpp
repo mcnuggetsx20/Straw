@@ -21,9 +21,15 @@ int main(int argc, char *argv[]){
     window -> grid[1] = { new TEXT( new QLabel(window) ), new TEXT( new QLabel(window) ), new TEXT( new QLabel(window) ), new TEXT( new QLabel(window) ), new TEXT( new QLabel(window) ), new TEXT( new QLabel(window) ) };
     window -> grid[2] = { new TEXT( new QLabel(window) ), new TEXT( new QLabel(window) ), new TEXT( new QLabel(window) ), new TEXT( new QLabel(window) ), new TEXT( new QLabel(window) ), new TEXT( new QLabel(window) ) };
 
+    window -> grid[0][0] -> fptr = &eth_switch;
+    window -> grid[0][1] -> fptr = &wifi_switch;
+
+    //std::cout << (window -> grid[0][0] -> label -> text()).toStdString() << '\n';
+
     window -> show();
     window -> animation(start, stop);
     window -> initGrid();
+    refresh -> read();
 
     return app.exec();
 }

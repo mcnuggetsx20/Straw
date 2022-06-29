@@ -1,0 +1,9 @@
+
+jedyne wifi podlaczone teraz
+nmcli --get-values=NAME,TYPE con show --active | grep wireless | awk -F ':' '{print $1}'
+
+czy wlaczone wifi
+nmcli --get-values=WIFI radio
+
+czy dane polaczenie jest teraz aktywne
+nmcli --get-values=DEVICE,NAME con show --active | grep 'nazwa polaczenia'
