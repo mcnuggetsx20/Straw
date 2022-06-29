@@ -36,7 +36,6 @@ bool connectionSwitch(std::string connection,  int &column, bool currentCon, std
 
     if(column==1){
         if(currentCon){
-            std::cout << 1 << '\n';
             command = "nmcli con down '" + connection + "' &";
             pCommand = command.c_str();
             system(pCommand);
