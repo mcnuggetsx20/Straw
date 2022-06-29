@@ -44,7 +44,7 @@ void CustomWindow::select(){
 }
 
 void CustomWindow::enterPassword(QString &key){
-    for(int i =0; i < password.length(); ++i){
+    for(int i =0; i < (int)password.length(); ++i){
         std::cout <<"\b \b" << std::flush;
     }
 
@@ -137,7 +137,7 @@ void CustomWindow::getEth(){
     std::string a = getOutput("nmcli --get-values=NAME,TYPE connection show --active | grep ethernet | awk -F ':' '{print $1}'");
     currentEth.resize(0);
     int c = 0;
-    for(int i =0 ;i < a.length(); ++i){
+    for(int i =0 ;i < (int)a.length(); ++i){
         if(a[i] == '\n'){
             currentEth.push_back( a.substr(c, i-c) );
             c= i+1;
