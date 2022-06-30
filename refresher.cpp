@@ -20,7 +20,7 @@ void REFRESHER::read(){
     refresh(win -> wifi_list,  win, c1);
     refresh(win -> eth_list,  win, c2);
 
-    std::string command = "(nmcli --get-values=SSID,SIGNAL,BSSID --escape=no device wifi list | grep -v BC:1A:E4:84:52:B2 | awk -F ':' '{print $1}' > " + win -> wifi_list + ") &";
+    std::string command = "(nmcli --get-values=SSID,SIGNAL,BSSID --escape=no device wifi list | grep -v BC:1A:E4:84:52:B2 | awk -F ':' '{print $1}' | awk '!/^[[:space:]]*$/' > " + win -> wifi_list + ") &";
     const char * pCommand = command.c_str();
     system(pCommand);
 

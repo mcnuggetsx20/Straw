@@ -12,8 +12,8 @@ int main(int argc, char *argv[]){
 
     CustomWindow *window = new CustomWindow;
 
-    QRect start = QRect(2*1920, 30, 400, 145);
-    QRect stop = QRect(1920 + 1500, 30, 400, 145);
+    QRect start = QRect(1366, 30, 400, 145);
+    QRect stop = QRect(950, 30, 400, 145);
     
     REFRESHER* refresh = new REFRESHER( window );
 

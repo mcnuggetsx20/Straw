@@ -25,8 +25,8 @@ CustomWindow::CustomWindow(){
 
 void CustomWindow::paintEvent(QPaintEvent *event){
     QPainter painter(this);
-    painter.setOpacity(0.4);
-    painter.setBrush(QColor(0,0,0));
+    painter.setOpacity(0.6);
+    painter.setBrush(QColor(255,255,255));
     painter.setPen(Qt::NoPen);
     painter.drawRect(rect());
 }

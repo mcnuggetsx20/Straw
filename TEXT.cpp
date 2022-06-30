@@ -5,9 +5,10 @@
 
 TEXT::TEXT( QLabel* _label, QString text,  QString font, int fontsize){
         //QLabel *label = new QLabel(window);
+        foreground = foreground_default;
         label = _label;
         label -> setText(text);
-        label -> setStyleSheet("background: rgba(0, 0, 0, 0); color: #D0D0D0");
+        label -> setStyleSheet("background: rgba(0, 0, 0, 0); color: " + this -> foreground_default);
 
         label -> setFont(QFont(font, fontsize, QFont::Bold));
         label -> adjustSize();
