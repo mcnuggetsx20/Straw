@@ -25,8 +25,8 @@ CustomWindow::CustomWindow(){
 
 void CustomWindow::paintEvent(QPaintEvent *event){
     QPainter painter(this);
-    painter.setOpacity(0.6);
-    painter.setBrush(QColor(255,255,255));
+    painter.setOpacity(0.4);
+    painter.setBrush(QColor(0,0,0));
     painter.setPen(Qt::NoPen);
     painter.drawRect(rect());
 }
@@ -46,6 +46,14 @@ void CustomWindow::select(){
 void CustomWindow::enterPassword(QString &key){
     for(int i =0; i < (int)password.length(); ++i){
         std::cout <<"\b \b" << std::flush;
+    }
+
+    if(key == "\x1b"){
+        password="";
+        coded="";
+        Return=true;
+        bEnterPassword=false;
+        passwordInd -> label -> setText("");
     }
 
     if(key=="\r"){
@@ -78,8 +86,12 @@ void CustomWindow::enterPassword(QString &key){
 void CustomWindow::keyPressEvent(QKeyEvent *event){
     QString key = event -> text();
 
+
     if(bEnterPassword){ CustomWindow::enterPassword(key); return;}
 
+    if(key == "\x1b"){
+        this -> close();
+    }
     if(key == "\r"){
         if(column == 0){
             grid[column][row[column]%6] -> fptr();
