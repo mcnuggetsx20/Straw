@@ -14,7 +14,7 @@
 //#include "TEXT.cpp"
 
 CustomWindow::CustomWindow(){
-    this -> setWindowTitle("Straw");
+    this -> setWindowTitle(config::win_name);
     this -> setAttribute(Qt::WA_TranslucentBackground,1);
     passwordInd = new TEXT( new QLabel(this), "" );
     passwordField = new TEXT( new QLabel(this), "" );
@@ -25,8 +25,8 @@ CustomWindow::CustomWindow(){
 
 void CustomWindow::paintEvent(QPaintEvent *event){
     QPainter painter(this);
-    painter.setOpacity(0.4);
-    painter.setBrush(QColor(0,0,0));
+    painter.setOpacity( config::opacity );
+    painter.setBrush( config::background );
     painter.setPen(Qt::NoPen);
     painter.drawRect(rect());
 }
