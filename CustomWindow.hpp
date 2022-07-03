@@ -5,6 +5,7 @@
 //#include <QKeyEvent>
 #include <iostream>
 #include <vector>
+#include "tools.cpp"
 
 #include "TEXT.cpp"
 
@@ -19,8 +20,9 @@ class CustomWindow : public QMainWindow {
         std::vector<std::string> currentEth;
         std::string coded = "";
         std::string password = "";
-        const std::string wifi_list = "/home/mcnuggetsx20/.config/Straw/wifi_list";
-        const std::string eth_list = "/home/mcnuggetsx20/.config/Straw/eth_list";
+        std::string home = getOutput("printf $HOME");
+        const std::string wifi_list = home + "/.config/Straw/wifi_list";
+        const std::string eth_list = home + "/.config/Straw/eth_list";
         int row[3] = {0,0,0};
         int column = 0;
         int maxRows[3] = {1, 6, 6};
